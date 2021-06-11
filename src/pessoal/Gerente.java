@@ -31,7 +31,6 @@ public class Gerente extends Funcionario{
 		this.numeroDeFuncionariosGerenciados = numeroDeFuncionariosGerenciados;
 	}
 	
-	@Override
 	public double getBonificacao() {
 		return this.getSalario() * 0.15;
 	}
