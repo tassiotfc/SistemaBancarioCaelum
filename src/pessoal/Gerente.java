@@ -1,11 +1,19 @@
 package pessoal;
 
-public class Gerente extends Funcionario{
+public class Gerente extends Funcionario implements Autenticavel{
 	private int senha;
 	private int numeroDeFuncionariosGerenciados;
+	private TipoDepartamento tipoDepto;
 	
+	public Gerente(String nome, String cpf, double salario, int senha, TipoDepartamento tipoDepto) {
+		super(nome, cpf, salario);
+		this.senha = senha;
+		this.tipoDepto = tipoDepto;
+	}
+	
+	@Override
 	public boolean autentica(int senha) {
-		if(this.senha == senha) {
+		if(this.senha == senha && this.tipoDepto == TipoDepartamento.GERENCIA) {
 			System.out.println("Acesso permitido!");
 			return true;
 		}
@@ -15,22 +23,7 @@ public class Gerente extends Funcionario{
 		}
 	}
 
-	public int getSenha() {
-		return senha;
-	}
-
-	public void setSenha(int senha) {
-		this.senha = senha;
-	}
-
-	public int getNumeroDeFuncionariosGerenciados() {
-		return numeroDeFuncionariosGerenciados;
-	}
-
-	public void setNumeroDeFuncionariosGerenciados(int numeroDeFuncionariosGerenciados) {
-		this.numeroDeFuncionariosGerenciados = numeroDeFuncionariosGerenciados;
-	}
-	
+	//implementacao de metodo abstrato
 	public double getBonificacao() {
 		return this.getSalario() * 0.15;
 	}
@@ -39,7 +32,8 @@ public class Gerente extends Funcionario{
 	public String getString() {
 		String str = super.getString();
 		str = str + 
-				"Numero de Funcionarios Gerenciados: "+numeroDeFuncionariosGerenciados+"\n";
+				"Numero de Funcionarios Gerenciados: "+numeroDeFuncionariosGerenciados+"\n" +
+				"Departamento: "+tipoDepto+"\n";
 		return str;
 	}
 }
